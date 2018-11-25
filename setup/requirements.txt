@@ -1,5 +1,5 @@
 requests==2.18.4
-urllib3>=1.21.1
+urllib3==1.22
 setuptools
 iptools
 pydispatcher
